@@ -15,7 +15,8 @@ public class CategoryService {
 	
 	@Autowired
 	private CategoryMapper categoryMapper;
-
+	
+	//查询所有一级分类 
 	public List<Category> findAll() {
 		return categoryMapper.findAll();
 	}

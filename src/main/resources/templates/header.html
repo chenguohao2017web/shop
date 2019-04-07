@@ -8,15 +8,15 @@
 		<div class="container header">
 			<div class="span5">
 				<div class="logo">
-					<a href="./网上商城/index.htm"> <img
+					<!-- <a href="./网上商城/index.htm"> <img
 						src="./image/r___________renleipic_01/logo.gif" alt="传智播客" />
-					</a>
+					</a> -->
 				</div>
 			</div>
 			<div class="span9">
 				<div class="headerAd">
-					<img src="./image/header.jpg" width="320" height="50" alt="正品保障"
-						title="正品保障" />
+					<!-- <img src="./image/header.jpg" width="320" height="50" alt="正品保障"
+						title="正品保障" /> -->
 				</div>
 			</div>
 			
@@ -48,8 +48,8 @@
 			<div class="span24">
 				<ul class="mainNav">
 					<li><a th:href="@{/}">首页</a> |</li>
-					<li th:each="item:${session.cList}">
-						<a href="#" th:text="${item.cname}"></a> |
+					<li th:each="category : ${session.cList}">
+						<a th:href="@{'/product/getProductByCid?cid=' +  ${category.cid} + '&page=1'}" th:text="${category.cname}"></a> |
 					</li>
 				</ul>
 			</div>

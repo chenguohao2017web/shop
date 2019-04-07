@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>传智网上商城</title>
+	<link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/product.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+	<div th:replace="header"></div>
+	
+	<div class="container productList">
+		<div class="span6">
+			<div class="hotProductCategory">
+				<dl th:each="category : ${session.cList}">
+					<dt>
+						<a th:href="@{'/product/getProductByCid?cid=' + ${category.cid} + '&page=1'}" th:text="${category.cname}">蔬菜</a>
+					</dt>
+					<dd th:each="categorySecond : ${category.categoryseconds}">
+						<a th:href="@{'/product/getProductByCsid?page=1&csid='+${categorySecond.csid}}" th:text="${categorySecond.csname}"></a>
+					</dd>
+				</dl>
+				
+			</div>
+		</div>
+		<div class="span18 last">
+
+			<form id="productForm"
+				action="./image/蔬菜 - Powered By Mango Team.htm" method="get">
+				<input type="hidden" id="brandId" name="brandId" value=""> <input
+					type="hidden" id="promotionId" name="promotionId" value="">
+				<input type="hidden" id="orderType" name="orderType" value="">
+				<input type="hidden" id="pageNumber" name="pageNumber" value="1">
+				<input type="hidden" id="pageSize" name="pageSize" value="20">
+				
+				
+				<!-- 商品列表 -->
+				<div id="result" class="result table clearfix">
+					<ul>
+						<li th:each="item : ${pageBean.list}">
+							<a th:href="@{'/product/getItemById?pid=' + ${item.pid}}"> 
+								<img th:src="${'/' +item.image}" width="170" height="170" style="display: inline-block;">
+								<span style='color: green' th:text="${item.pname}"></span>
+								<span class="price">商城价： ￥<Strong th:text="${item.shop_price}"></Strong>/份 </span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+				<!-- 分页 -->
+				<div class="pagination">
+					<a th:href="@{'/product/getProductByCid?page=1&cid=' + ${categoryCid}}" class="firstPage">&nbsp;</a> 
+					<a th:href="@{'/product/getProductByCid?page='+${pageBean.page - 1 > 0 ? pageBean.page - 1 : 1}+'&cid=' + ${categoryCid}}" class="previousPage">&nbsp;</a>
+					
+					<a th:each="item,status : ${pageBean.totalPage }" class="currentPage" th:text="${status.count}"></a> 
+					
+					<a th:href="@{'/product/getProductByCid?page='+${pageBean.page + 1 > pageBean.totalPage ? pageBean.totalPage : pageBean.page + 1}+'&cid=' + ${categoryCid}}" class="nextPage">&nbsp;</a> 
+					<a th:href="@{'/product/getProductByCid?page='+${pageBean.totalPage}+'&cid=' + ${categoryCid}}" class="lastPage">&nbsp;</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

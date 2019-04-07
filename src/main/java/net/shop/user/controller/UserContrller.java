@@ -24,26 +24,24 @@ public class UserContrller {
 	
 	//登录方法
 	@RequestMapping("/user/login")
-	public ModelAndView login(User user) {
-		ModelAndView mav = new ModelAndView();
+	public String login(User user, ModelMap model, HttpSession session) {
 		//根据用户民和密码查询用户
 		User existUser = userService.findByUsernameAndPassword(user);
 		if(existUser != null) {
 			//登录成功
-			mav.addObject("existUser", existUser);
-			mav.setViewName("index");
+			session.setAttribute("existUser", existUser);
+			return "redirect:/";
 		}else {
-			mav.addObject("error", "用户名或密码错误");
-			mav.setViewName("login");
+			model.addAttribute("error", "用户名或密码错误");
+			return "login";
 		}
-		return mav;
 	}
 	
 	//退出登录
 	@RequestMapping("/user/loginOut")
 	public Object loginout(HttpSession session) {
 		session.invalidate();
-		return "index";
+		return "redirect:/";
 	}
 	
 	//跳转注册页面

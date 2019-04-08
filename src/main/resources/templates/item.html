@@ -223,12 +223,12 @@
 					</dd>
 				</dl>
 			</div>
-			<div class="action">
-
+			<form class="action" th:action="@{/cart/addCart}">
+				<input type="hidden" name="pid" th:value="${existProduct.pid}" />
 				<dl class="quantity">
 					<dt>购买数量:</dt>
 					<dd>
-						<input id="quantity" name="quantity" value="1" maxlength="4"
+						<input id="quantity" name="count" value="1" maxlength="4"
 							onpaste="return false;" type="text">
 							<div>
 								<span id="increase" class="increase">&nbsp;</span> <span
@@ -238,9 +238,9 @@
 					<dd>件</dd>
 				</dl>
 				<div class="buy">
-					<input id="addCart" class="addCart" value="加入购物车" type="button">
+					<input id="addCart" class="addCart" value="加入购物车" type="submit">
 				</div>
-			</div>
+			</form>
 			<div id="bar" class="bar">
 				<ul>
 					<li id="introductionTab"><a href="#introduction">商品介绍</a></li>

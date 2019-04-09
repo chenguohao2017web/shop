@@ -43,8 +43,8 @@
 					id="effectivePoint">596</em> 商品金额: <strong id="effectivePrice">￥<span th:text="${session.cart.total}"></span>元</strong>
 			</div>
 			<div class="bottom">
-				<a th:href="@{/cart/clearCart}" id="clear" class="clear">清空购物车</a> <a
-					href="./会员登录.htm" id="submit" class="submit">提交订单</a>
+				<a th:href="@{/cart/clearCart}" id="clear" class="clear">清空购物车</a>
+				<a th:href="@{/order/orderPage}" id="submit" class="submit">提交订单</a>
 			</div>
 		</div>
 	</div>

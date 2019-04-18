@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+	<div th:fragment="menu" class="menu" style="width:300px;box-sizing:border-box;">
+		<ul class="nav nav-pills nav-stacked">
+			<li role="presentation">
+				<a th:href="@{/admin/category/findAll}">一级分类</a></li>
+			<li role="presentation">
+				<a th:href="@{/admin/categorySecond/findAll?page=1}">二级分类</a></li>
+			<li role="presentation">
+				<a th:href="@{/product/findAll?page=1}">商品</a></li>
+			<li role="presentation">
+				<a href="#">系统用户</a></li>
+		</ul>
+	</div>
+</body>
+</html>

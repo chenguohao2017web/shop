@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<div th:replace="admin/common/head :: head"></div>
+<body>
+	<div th:replace="admin/common/header :: header"></div>
+	<div style="display: flex;">
+		<!-- 左侧菜单 -->
+		<div th:replace="admin/common/menu :: menu"></div>
+
+		<!-- 右侧内容 -->
+		<div style="flex: 1;" class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<form role="form" action="#">
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">商品名称</label> <input type="text"
+								class="form-control" id="exampleInputEmail1" name="pname" />
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail2">商城价格</label> <input type="text"
+								class="form-control" id="exampleInputEmail2" name="market_price" />
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail3">常规价格</label> <input type="text"
+								class="form-control" id="exampleInputEmail3" name="shop_price" />
+						</div>
+
+						<div class="form-group">
+							<label for="fileChange">上传图片</label> <input type="file"
+								class="form-control" id="fileChange" name="image" /> <img
+								th:if="${product !=null}" src="#"
+								style="width: 100px; height: 100px;" />
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail5">商品描述</label> <input type="text"
+								class="form-control" id="exampleInputEmail5" name="pdesc" />
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail6">是否热门商品</label> <select
+								class="form-control" id="exampleInputEmail6" name="is_hot">
+								<option value="0">否</option>
+								<option value="1">是</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail7">所属二级分类</label> <select
+								class="form-control" id="exampleInputEmail7" name="csid">
+								<option th:text="${cs.csname}" th:value="${cs.csid}"
+									th:each="cs : ${categorySecondList}"></option>
+							</select>
+						</div>
+
+						<button th:if="${product != null}" type="submit"
+							class="btn btn-default">新增</button>
+						<button th:if="${product == null}" type="submit"
+							class="btn btn-default">修改</button>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		const el = document.getElementById("fileChange")
+		el.onchange = function(e){
+			uploadFun(e)
+		}
+		
+		function uploadFun(e) {
+			
+			let file = e.target.files[0];
+			let formData = new FormData();
+			formData.append("file", file);
+			
+			axios({
+				url:"http://192.168.0.99:8080/upload/file",
+				method:"post",
+				data:formData,
+				headers: {
+					"Content-Type": "multipart/form-data"
+					}
+			}).then((res) => {
+				console.log(res)
+			})
+		}
+	</script>
+</body>
+</html>

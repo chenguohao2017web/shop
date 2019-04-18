@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<div th:replace="admin/common/head :: head"></div>
+<body>
+	<div th:replace="admin/common/header :: header"></div>
+	<div style="display: flex;">
+		<!-- 左侧菜单 -->
+		<div th:replace="admin/common/menu :: menu"></div>
+
+		<!-- 右侧内容 -->
+		<div style="flex: 1;" class="container">
+			<table class="table">
+				<tr>
+					<td>#</td>
+					<td>名稱</td>
+					<td>操作</td>
+				</tr>
+
+				<tr th:each="categorySecond,state : ${pageBean.list}">
+					<td th:text="${state.count}"></td>
+					<td th:text="${categorySecond.csname}"></td>
+					<td><a
+						th:href="@{'/admin/categorySecond/editPage?csid=' + ${categorySecond.csid} }">編輯</a>
+						<a
+						th:href="@{'/admin/categorySecond/delByCsid?csid='+${categorySecond.csid}}">刪除</a>
+					</td>
+				</tr>
+			</table>
+
+			<nav aria-label="Page navigation" style="text-align: center">
+				<ul class="pagination">
+					<li><a
+						th:href="@{'/admin/categorySecond/findAll?page=' + ${pageBean.page - 1}}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+
+					<li><a
+						th:href="@{'/admin/categorySecond/findAll?page=' + ${i}}"
+						th:each="i:${#numbers.sequence(1,pageBean.totalPage)}"
+						th:text="${i}"></a></li>
+
+					<li><a
+						th:href="@{'/admin/categorySecond/findAll?page=' + ${pageBean.page + 1}}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+
+			<a th:href="@{/admin/categorySecond/addPage}" type="button"
+				class="btn btn-primary btn-lg btn-block">新增 </a>
+		</div>
+
+
+	</div>
+</body>
+</html>

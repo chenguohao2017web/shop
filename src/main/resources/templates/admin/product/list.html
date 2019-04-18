@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<div th:replace="admin/common/head :: head"></div>
+<body>
+	<div th:replace="admin/common/header :: header"></div>
+	<div style="display: flex;">
+		<!-- 左侧菜单 -->
+		<div th:replace="admin/common/menu :: menu"></div>
+
+		<!-- 右侧内容 -->
+		<div style="flex: 1;" class="container">
+			<table class="table">
+				<tr>
+					<td>#</td>
+					<td>名稱</td>
+					<td>价格</td>
+					<td>图片</td>
+					<td>创建时间</td>
+					<td>操作</td>
+				</tr>
+
+				<tr th:each="product,state : ${pageBean.list}">
+					<td th:text="${state.count}"></td>
+					<td th:text="${product.pname}"></td>
+					<td th:text="${product.market_price}+'元'"></td>
+					<td>
+						<img th:src="@{'/' + ${product.image}}" style="width:50px;height:50px" />
+					</td>
+					<td th:text="${#dates.format(product.pdate, 'yyyy-MM-dd')}"></td>
+					<td><a
+						th:href="@{'/admin/categorySecond/editPage?csid=' + ${product.pid} }">編輯</a>
+						<a
+						th:href="@{'/admin/categorySecond/delByCsid?csid='+${product.pid}}">刪除</a>
+					</td>
+				</tr>
+			</table>
+
+			<nav aria-label="Page navigation" style="text-align: center">
+				<ul class="pagination">
+					<li><a
+						th:href="@{'/admin/categorySecond/findAll?page=' + ${pageBean.page - 1}}"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+
+					<li><a
+						th:href="@{'/admin/categorySecond/findAll?page=' + ${i}}"
+						th:each="i:${#numbers.sequence(1,pageBean.totalPage)}"
+						th:text="${i}"></a></li>
+
+					<li><a
+						th:href="@{'/admin/categorySecond/findAll?page=' + ${pageBean.page + 1}}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+
+			<a th:href="@{/product/productPage}" type="button"
+				class="btn btn-primary btn-lg btn-block">新增 </a>
+		</div>
+
+
+	</div>
+</body>
+</html>

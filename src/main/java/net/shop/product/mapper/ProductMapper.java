@@ -1,5 +1,6 @@
 package net.shop.product.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
@@ -38,5 +39,12 @@ public interface ProductMapper {
 	//根据二级分类id 获取总数
 	@Select("select count(*) from product where product.csid = #{csid}")
 	Integer getCountByCsid(String csid);
+
+	@Select("select count(*) from product")
+	Integer findCount();
+	
+	//查询所有商品带分页
+	@Select("select * from product limit #{start},#{pageSize}")
+	ArrayList<Product> findAll(Integer start, Integer pageSize);
 	
 }

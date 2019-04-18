@@ -2,12 +2,22 @@ package net.shop.categorySecond.vo;
 
 import java.util.List;
 
+import net.shop.category.vo.Category;
 import net.shop.product.vo.Product;
 
 public class CategorySecond {
 	private Integer csid;
 	private String csname;
 	
+	//一级分类的对象
+	private Category category;
+	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	//二级分类下有多个商品
 	private List<Product> products;
 	

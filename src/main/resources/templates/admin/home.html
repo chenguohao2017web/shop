@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<div th:replace="admin/common/head :: head"></div>
+<body>
+	<div th:replace="admin/common/header :: header"></div>
+	<div  style="display:flex;">
+		<!-- 左侧菜单 -->
+		<div th:replace="admin/common/menu :: menu"></div>
+
+		<!-- 右侧内容 -->
+		<div style="flex:1;">
+			歡迎登陸
+		</div>
+
+
+	</div>
+</body>
+</html>

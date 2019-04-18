@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<div th:replace="admin/common/head :: head"></div>
+<body>
+	<div th:replace="admin/common/header :: header"></div>
+	<div style="display: flex;">
+		<!-- 左侧菜单 -->
+		<div th:replace="admin/common/menu :: menu"></div>
+
+		<!-- 右侧内容 -->
+		<div style="flex: 1;" class="container">
+			<form th:action="@{/admin/category/update}">
+				<div class="form-group">
+					<input type="hidden" name="cid" th:value="${category.cid}" />
+					<label for="exampleInputEmail1">一級分類名稱</label>
+					<input
+						type="text" class="form-control" id="exampleInputEmail1" name="cname"
+						placeholder="一級分類名稱" th:value="${category.cname}">
+				</div>
+				<button type="submit" class="btn btn-default">修改</button>
+			</form>
+		</div>
+
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<div th:replace="admin/common/head :: head"></div>
+<body>
+	<div th:replace="admin/common/header :: header"></div>
+	<div style="display: flex;">
+		<!-- 左侧菜单 -->
+		<div th:replace="admin/common/menu :: menu"></div>
+
+		<!-- 右侧内容 -->
+		<div style="flex: 1;" class="container">
+			<table class="table">
+				<tr>
+					<td>#</td>
+					<td>名稱</td>
+					<td>操作</td>
+				</tr>
+				
+				<tr th:each="category,state : ${list}">
+					<td th:text="${state.count}"></td>
+					<td th:text="${category.cname}"></td>
+					<td>
+						<a th:href="@{'/admin/category/editPage?cid=' + ${category.cid} }">編輯</a>
+						<a th:href="@{'/admin/category/delByCid?cid='+${category.cid}}">刪除</a>
+					</td>
+				</tr>
+			</table>
+			
+			<a th:href="@{/admin/category/addPage}" type="button" class="btn btn-primary btn-lg btn-block">新增 </a>
+		</div>
+
+
+	</div>
+</body>
+</html>

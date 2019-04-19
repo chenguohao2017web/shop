@@ -12,7 +12,7 @@
 		<div style="flex: 1;" class="container">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-					<form role="form" action="#">
+					<form role="form" th:action="@{/product/add}" method="post">
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">商品名称</label> <input type="text"
@@ -30,10 +30,12 @@
 						</div>
 
 						<div class="form-group">
-							<label for="fileChange">上传图片</label> <input type="file"
-								class="form-control" id="fileChange" name="image" /> <img
-								th:if="${product !=null}" src="#"
-								style="width: 100px; height: 100px;" />
+							<label for="uploadImg">上传图片</label> 
+							<input type="file" id="fileId"
+								class="form-control"  />
+								<img   src="#" id="imgShowId"
+								style="width: 100px; height: 100px;display:none" />
+								<input id="sendImg" type="hidden" value="" name="image" />
 						</div>
 
 						<div class="form-group">
@@ -57,10 +59,7 @@
 							</select>
 						</div>
 
-						<button th:if="${product != null}" type="submit"
-							class="btn btn-default">新增</button>
-						<button th:if="${product == null}" type="submit"
-							class="btn btn-default">修改</button>
+						<button type="submit" class="btn btn-default">新增</button>
 
 					</form>
 				</div>
@@ -71,7 +70,10 @@
 	</div>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
-		const el = document.getElementById("fileChange")
+		const el = document.getElementById("fileId")
+		const imgEl = document.getElementById("imgShowId")
+		const imgEl1 = document.getElementById("sendImg")
+		
 		el.onchange = function(e){
 			uploadFun(e)
 		}
@@ -83,14 +85,16 @@
 			formData.append("file", file);
 			
 			axios({
-				url:"http://192.168.0.99:8080/upload/file",
+				url:"/upload/file",
 				method:"post",
 				data:formData,
 				headers: {
 					"Content-Type": "multipart/form-data"
 					}
 			}).then((res) => {
-				console.log(res)
+				imgEl.style.display = "block"
+				imgEl.src = res.data.data
+				imgEl1.value = res.data.data
 			})
 		}
 	</script>

@@ -5,7 +5,7 @@
 	<div th:fragment="header" class="header">
 		<div class="jumbotron" style="margin-bottom:0;">
 			<div class="container">
-				<h3>welcome：<span th:text="${session.existUser.username}"></span></h3>
+				<h3>welcome：<span th:text="${session.adminUser.username}"></span></h3>
 				<h4><a class="btn btn-primary" th:href="@{/admin/loginOut}" role="button">退出登錄 </a></h4>
 			</div>
 		</div>

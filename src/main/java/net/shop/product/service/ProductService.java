@@ -119,4 +119,11 @@ public class ProductService {
 		return pageBean;
 	}
 
+	public void save(Product product) {
+		//保存商品表
+		productMapper.save(product);
+		
+		
+	}
+
 }

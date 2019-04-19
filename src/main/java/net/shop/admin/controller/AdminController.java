@@ -26,12 +26,12 @@ public class AdminController {
 	//登陆方法
 	@RequestMapping("/loginFun")
 	public String loginfun(String username, String password, ModelMap model, HttpSession session) {
-		AdminUser existUser = adminService.findByUsernameAndPassword(username, password);
-		if(existUser == null) {
+		AdminUser adminUser = adminService.findByUsernameAndPassword(username, password);
+		if(adminUser == null) {
 			model.addAttribute("error", "用户名或密码错误");
 			return "admin/login";
 		}
-		session.setAttribute("existUser", existUser);
+		session.setAttribute("adminUser", adminUser);
 		return "admin/home";
 	}
 	

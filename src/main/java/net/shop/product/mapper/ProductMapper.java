@@ -3,6 +3,7 @@ package net.shop.product.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import net.shop.product.vo.Product;
@@ -46,5 +47,15 @@ public interface ProductMapper {
 	//查询所有商品带分页
 	@Select("select * from product limit #{start},#{pageSize}")
 	ArrayList<Product> findAll(Integer start, Integer pageSize);
+	
+	//保存商品
+	@Insert("insert into product "
+			+ "set pname = #{pname},"
+			+ "market_price = #{market_price}, "
+			+ "shop_price = #{shop_price}, "
+			+ "image=#{image}, pdesc=#{pdesc}, "
+			+ "is_hot=#{is_hot}, pdate=#{pdate}, "
+			+ "csid=#{csid}")
+	void save(Product product);
 	
 }

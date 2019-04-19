@@ -11,6 +11,14 @@ public class Product {
 	private Integer is_hot;
 	private Date pdate;
 	private String image;
+	private Integer csid;
+	
+	public Integer getCsid() {
+		return csid;
+	}
+	public void setCsid(Integer csid) {
+		this.csid = csid;
+	}
 	public String getImage() {
 		return image;
 	}

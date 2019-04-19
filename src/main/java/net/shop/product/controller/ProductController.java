@@ -1,5 +1,6 @@
 package net.shop.product.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,15 @@ public class ProductController {
 		List<CategorySecond> categorySecondList = categorySecondService.findAll();
 		model.addAttribute("categorySecondList", categorySecondList);
 		return "admin/product/product";
+	}
+	
+	//新增商品
+	@PostMapping("/add")
+	public String productAdd(Product product) {
+		product.setPdate(new Date());
+		//调用商品保存接口
+		productService.save(product);
+		return "redirect:/product/findAll";
 	}
 	
 	
